@@ -16,30 +16,48 @@
 
   time.timeZone = "Asia/Tokyo";
 
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
+  i18n = {
+    defaultLocale = "ja_JP.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "ja_JP.UTF-8";
+      LC_IDENTIFICATION = "ja_JP.UTF-8";
+      LC_MEASUREMENT = "ja_JP.UTF-8";
+      LC_MONETARY = "ja_JP.UTF-8";
+      LC_NAME = "ja_JP.UTF-8";
+      LC_NUMERIC = "ja_JP.UTF-8";
+      LC_PAPER = "ja_JP.UTF-8";
+      LC_TELEPHONE = "ja_JP.UTF-8";
+      LC_TIME = "ja_JP.UTF-8";
+    };
+    inputMethod = {
+      enable = true;
+      type = "fcitx5";
 
-  # services.xserver.enable = true;
+      fcitx5 = {
+        addons = with pkgs; [
+          fcitx5-mozc
+          fcitx5-gtk
+        ];
+      };
+    };
+  };
+
+  console = {
+  #   font = "Lat2-Terminus16";
+    keyMap = "jp106";
+  };
+
   services.xserver = {
     enable = true;
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
     displayManager.lightdm.enable = true;
     windowManager.dwm.enable = true;
+    desktopManager.runXdgAutostartIfNone = true;
+    xkb.layout = "jp";
   };
   
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -62,14 +80,48 @@
     ghostty
     dmenu
     st
+    kdePackages.fcitx5-configtool
   ];
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
+  fonts = {
+    enableDefaultPackages = true;
+
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-color-emoji
+    ];
+
+    fontconfig = {
+      enable = true;
+
+      defaultFonts = {
+        sansSerif = [
+          "Noto Sans CJK JP"
+          "Noto Sans"
+        ];
+
+        serif = [
+          "Noto Serif CJK JP"
+          "Noto Serif"
+        ];
+
+        monospace = [
+          "Noto Sans Mono CJK JP"
+        ];
+
+        emoji = [
+          "Noto Color Emoji"
+        ];
+      };
+    };
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
- system.stateVersion = "26.05";
+  system.stateVersion = "26.05";
 
 }
 
