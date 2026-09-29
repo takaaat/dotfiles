@@ -15,7 +15,6 @@
   networking.networkmanager.enable = true;
 
   time.timeZone = "Asia/Tokyo";
-
   i18n = {
     defaultLocale = "ja_JP.UTF-8";
     extraLocaleSettings = {
@@ -43,7 +42,6 @@
   };
 
   console = {
-  #   font = "Lat2-Terminus16";
     keyMap = "jp106";
   };
 
@@ -64,12 +62,11 @@
     pulse.enable = true;
   };
 
+  programs.zsh.enable = true;
   users.users.iketk = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      tree
-    ];
+    shell = pkgs.zsh;
   };
 
   programs.firefox.enable = true;
@@ -96,22 +93,18 @@
 
     fontconfig = {
       enable = true;
-
       defaultFonts = {
         sansSerif = [
           "Noto Sans CJK JP"
           "Noto Sans"
         ];
-
         serif = [
           "Noto Serif CJK JP"
           "Noto Serif"
         ];
-
         monospace = [
           "Noto Sans Mono CJK JP"
         ];
-
         emoji = [
           "Noto Color Emoji"
         ];
