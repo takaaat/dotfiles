@@ -51,6 +51,9 @@
     autoRepeatInterval = 35;
     displayManager.lightdm.enable = true;
     windowManager.dwm.enable = true;
+    windowManager.dwm.package = pkgs.dwm.overrideAttrs {
+      src = ./dwm;
+    };
     desktopManager.runXdgAutostartIfNone = true;
     xkb.layout = "jp";
   };
