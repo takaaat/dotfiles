@@ -83,8 +83,6 @@
 
   environment.systemPackages = with pkgs; [
     wget
-    ghostty
-    dmenu
     st
     kdePackages.fcitx5-configtool
   ];

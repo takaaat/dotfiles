@@ -13,6 +13,26 @@
         };
     };
 
+    programs.ghostty = {
+    	enable = true;
+	enableZshIntegration = true;
+	settings = {
+		font-size = 14;
+		window-decoration = "none";
+		window-padding-x = 3;
+		window-padding-y = 3;
+		window-padding-balance = true;
+	};
+    };
+
+    programs.starship = {
+    	enable = true;
+    };
+
+    programs.rofi = {
+    	enable = true;
+    };
+
     programs.zsh = {
     	enable = true;
 	enableCompletion = true;
